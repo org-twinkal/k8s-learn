@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-app-deployment
+  namespace: k8s-learn
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-app
+  template:
+    metadata:
+      name: notes-app
+      labels:
+        app: notes-app
+    spec:
+      containers:
+        - name: notes-app
+          image: twinkal1710/notes-app-k8s
+          ports:
+          - containerPort: 8000

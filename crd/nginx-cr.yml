@@ -1,0 +1,11 @@
+kind: Pipeline
+apiVersion: deployment.pods/v1
+metadata:
+  name: nginx
+  namespace: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80

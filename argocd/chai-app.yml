@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: chai-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: chai-app=twinkal1710/chai-devops
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/argocd-image-updater-git-creds
+    argocd-image-updater.argoproj.io/chai-app.update-strategy: semver
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/org-twinkal/ArgoCD-DEMO.git
+    targetRevision: main
+    path: image_updater/chai-app
+  destination:
+    server: https://10.0.0.4:33893
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
